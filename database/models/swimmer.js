@@ -12,7 +12,7 @@ const swimmerSchema = new Schema({
     require: true,
   },
   birthdate: {
-    type: Date,
+    type: String,
     require: true,
   },
   height: Number,
@@ -20,7 +20,7 @@ const swimmerSchema = new Schema({
   times: {
     distance: Number,
     style: String,
-    date: Date,
+    date: String,
     time: String,
     pool: Number,
   },
