@@ -1,6 +1,9 @@
+const cors = require("cors");
 const chalk = require("chalk");
 const debug = require("debug")("swappp:server");
+const morgan = require("morgan");
 const express = require("express");
+const swimmersRoutes = require("./routes/swimmersRoutes");
 
 const app = express();
 
@@ -16,5 +19,10 @@ const initializeServer = (port) => {
     }
   });
 };
+
+app.use(morgan("dev"));
+app.use(cors());
+app.use(express.json());
+app.use("/", swimmersRoutes);
 
 module.exports = { initializeServer };
