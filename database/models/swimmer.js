@@ -5,6 +5,10 @@ const swimmerSchema = new Schema({
     type: String,
     require: true,
   },
+  image: {
+    type: String,
+    default: "https://image.flaticon.com/icons/png/512/1228/1228248.png",
+  },
   usename: String,
   password: String,
   surname: {
