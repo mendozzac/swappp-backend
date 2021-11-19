@@ -4,6 +4,7 @@ const debug = require("debug")("swappp:server");
 const morgan = require("morgan");
 const express = require("express");
 const swimmersRoutes = require("./routes/swimmersRoutes");
+const { notFoundHandler, generalErrorHandler } = require("./middlewares/error");
 
 const app = express();
 
@@ -27,5 +28,8 @@ app.use(morgan("dev"));
 app.use(cors());
 app.use(express.json());
 app.use("/", swimmersRoutes);
+
+app.use(notFoundHandler);
+app.use(generalErrorHandler);
 
 module.exports = { initializeServer, app };

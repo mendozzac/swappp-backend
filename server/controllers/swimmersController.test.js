@@ -1,6 +1,8 @@
 const Swimmer = require("../../database/models/swimmer");
 const getSwimmers = require("./swimmersController");
 
+jest.mock("../../database/models/swimmer");
+
 describe("Given a getSwimmers function", () => {
   describe("When it receives an object res", () => {
     test("Then it should invoke the json method", async () => {
