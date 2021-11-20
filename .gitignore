@@ -105,4 +105,4 @@ dist
 
 # Sonnarqube
 .scannerwork
-.properties
+sonar-project.properties
