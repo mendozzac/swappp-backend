@@ -9,7 +9,8 @@ const createSwimmer = async (req, res, next) => {
   try {
     const swimmer = req.body;
     const newSwimmer = await Swimmer.create(swimmer);
-    res.status(201).json(newSwimmer);
+    res.status(201);
+    res.json(newSwimmer);
   } catch (error) {
     error.code = 400;
     error.message = "No se puede crear la ficha";
