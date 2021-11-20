@@ -77,3 +77,30 @@ describe("Given the '/swimmers' endpoint", () => {
     });
   });
 });
+
+describe("Given the '/register' endpoint", () => {
+  describe("When it receives a POST request", () => {
+    test("Then it should send a response with the swimmers and status 201", async () => {
+      const swimmer = {
+        name: "Charles",
+        surname: "Andrew",
+        birthdate: "27/04/93",
+        height: 198,
+        weight: 85,
+        times: {
+          distance: 100,
+          style: "Braza",
+          date: "20/03/20",
+          time: "1:00.09",
+          pool: 50,
+        },
+      };
+      const { body } = await request
+        .post("/register")
+        .send(swimmer)
+        .expect(201);
+
+      expect(body).toHaveProperty("name", "Charles");
+    });
+  });
+});
