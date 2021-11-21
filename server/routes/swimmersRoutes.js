@@ -3,11 +3,12 @@ const {
   getSwimmers,
   createSwimmer,
 } = require("../controllers/swimmersController");
+const path = require("../path/path");
 
 const router = express.Router();
 
-router.get("/swimmers", getSwimmers);
+router.get(path.swimmers, getSwimmers);
 
-router.post("/register", createSwimmer);
+router.post(path.register, createSwimmer);
 
 module.exports = router;
