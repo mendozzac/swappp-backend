@@ -18,4 +18,22 @@ const createSwimmer = async (req, res, next) => {
   }
 };
 
-module.exports = { getSwimmers, createSwimmer };
+const deleteSwimmer = async (req, res, next) => {
+  const { idSwimmer } = req.params;
+  try {
+    const searchedSwimmer = await Swimmer.findByIdAndDelete(idSwimmer);
+    if (searchedSwimmer) {
+      res.json({ id: searchedSwimmer.id });
+    } else {
+      const error = new Error("Swimmer not found");
+      error.code = 404;
+      next(error);
+    }
+  } catch (error) {
+    error.code = 400;
+    error.message = "Bad request";
+    next(error);
+  }
+};
+
+module.exports = { getSwimmers, createSwimmer, deleteSwimmer };
