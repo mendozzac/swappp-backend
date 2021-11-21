@@ -10,7 +10,7 @@ let server;
 const fakeSwimmers = [
   {
     _id: "619664f7a6781611df2a88d2",
-    name: "Kevin",
+    name: "Kelvin",
     surname: "Andrew",
     birthdate: "27/04/93",
     height: 196,
@@ -25,7 +25,7 @@ const fakeSwimmers = [
   },
   {
     _id: "61965fd7a6781611df2a88cf",
-    name: "Geofrey",
+    name: "James",
     surname: "Campbell",
     birthdate: "11/08/90",
     height: 190,
@@ -43,7 +43,7 @@ const fakeSwimmers = [
 beforeAll(async () => {
   await connectDB(process.env.MONGODB_STRING_TEST);
   server = await initializeServer(process.env.SERVER_PORT_TEST);
-  await Swimmer.deleteMany();
+  // await Swimmer.deleteMany();
 });
 
 afterAll((done) => {
@@ -85,6 +85,7 @@ describe("Given the '/register' endpoint", () => {
         name: "Charles",
         surname: "Andrew",
         birthdate: "27/04/93",
+        image: "https://image.flaticon.com/icons/png/512/1228/1228248.png",
         height: 198,
         weight: 85,
         times: {

@@ -2,7 +2,7 @@ const chalk = require("chalk");
 const debug = require("debug")("swappp:database");
 const mongoose = require("mongoose");
 
-const connectDB = () =>
+const connectDB = (string) =>
   new Promise((resolve, reject) => {
     mongoose.set("toJSON", {
       virtuals: true,
@@ -14,7 +14,7 @@ const connectDB = () =>
       },
     });
 
-    mongoose.connect(process.env.MONGODB_STRING, (error) => {
+    mongoose.connect(string, (error) => {
       if (error) {
         debug(chalk.red("Error en la conexión con la base de datos"));
         debug(chalk.red(error.message));
