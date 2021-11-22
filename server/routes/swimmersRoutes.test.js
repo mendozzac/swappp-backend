@@ -43,7 +43,6 @@ const fakeSwimmers = [
 beforeAll(async () => {
   await connectDB(process.env.MONGODB_STRING_TEST);
   server = await initializeServer(process.env.SERVER_PORT_TEST);
-  // await Swimmer.deleteMany();
 });
 
 afterAll((done) => {
