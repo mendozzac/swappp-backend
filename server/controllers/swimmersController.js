@@ -6,7 +6,7 @@ const getSwimmers = async (req, res) => {
 };
 
 const getSwimmerById = async (req, res, next) => {
-  const { idSwimmer } = req.parmas;
+  const { idSwimmer } = req.params;
 
   try {
     const searchedSwimmer = await Swimmer.findById(idSwimmer);
