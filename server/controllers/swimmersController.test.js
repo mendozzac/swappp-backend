@@ -144,4 +144,21 @@ describe("Given a createSwimmer function", () => {
       expect(res.json).toHaveBeenCalledWith(swimmer);
     });
   });
+  describe("When it receives an object res and a invalid object req", () => {
+    test("Then it should invoke next with an error", async () => {
+      const req = {};
+      const error = {};
+
+      Swimmer.create = jest.fn().mockRejectedValue(error);
+
+      const res = {
+        json: jest.fn(),
+      };
+      const next = jest.fn();
+
+      await createSwimmer(req, res, next);
+
+      expect(next).toHaveBeenCalledWith(error);
+    });
+  });
 });
