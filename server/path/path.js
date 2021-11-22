@@ -1,6 +1,6 @@
 const path = {
-  swimmers: "/swimmers",
-  register: "/register",
+  swimmers: "/nadadores",
+  register: "/registro",
   swimmer: "/:idSwimmer",
 };
 
