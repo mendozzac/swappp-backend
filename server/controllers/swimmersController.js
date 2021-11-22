@@ -5,6 +5,24 @@ const getSwimmers = async (req, res) => {
   res.json(swimmers);
 };
 
+const getSwimmerById = async (req, res, next) => {
+  const { idSwimmer } = req.parmas;
+
+  try {
+    const searchedSwimmer = await Swimmer.findById(idSwimmer);
+    if (searchedSwimmer) {
+      res.json(searchedSwimmer);
+    } else {
+      const error = new Error("No se encuentra el nadador");
+      error.code = 404;
+      next(error);
+    }
+  } catch (error) {
+    error.code = 400;
+    next(error);
+  }
+};
+
 const createSwimmer = async (req, res, next) => {
   try {
     const swimmer = req.body;
@@ -36,4 +54,4 @@ const deleteSwimmer = async (req, res, next) => {
   }
 };
 
-module.exports = { getSwimmers, createSwimmer, deleteSwimmer };
+module.exports = { getSwimmers, getSwimmerById, createSwimmer, deleteSwimmer };
