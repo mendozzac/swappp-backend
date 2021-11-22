@@ -3,6 +3,7 @@ const {
   getSwimmers,
   createSwimmer,
   getSwimmerById,
+  deleteSwimmer,
 } = require("./swimmersController");
 
 jest.mock("../../database/models/swimmer");
@@ -157,6 +158,62 @@ describe("Given a createSwimmer function", () => {
       const next = jest.fn();
 
       await createSwimmer(req, res, next);
+
+      expect(next).toHaveBeenCalledWith(error);
+    });
+  });
+});
+
+describe("Given a deleteSwimmer function", () => {
+  describe("When it receives a request with an id 1, a response and a next function", () => {
+    test("Then it should invoke Swimmer.findByIdAndDelete with an id 1", async () => {
+      const idSwimmer = 1;
+      const req = {
+        params: {
+          idSwimmer,
+        },
+      };
+      const res = {
+        json: () => {},
+      };
+      const next = () => {};
+      Swimmer.findByIdAndDelete = jest.fn().mockResolvedValue({});
+
+      await deleteSwimmer(req, res, next);
+
+      expect(Swimmer.findByIdAndDelete).toHaveBeenCalledWith(idSwimmer);
+    });
+  });
+  describe("And Swimmer.findByIdAndDelete rejects", () => {
+    test("Then it should invoke a next function with an error", async () => {
+      const error = {};
+      Swimmer.findByIdAndDelete = jest.fn().mockRejectedValue(error);
+      const req = {
+        params: {
+          id: 1,
+        },
+      };
+      const res = {};
+      const next = jest.fn();
+
+      await deleteSwimmer(req, res, next);
+
+      expect(next).toHaveBeenCalledWith(error);
+    });
+  });
+  describe("And Swimmer.findByIdAndDelete returns undefined", () => {
+    test("Then it should invoke a next function with an error", async () => {
+      const error = new Error("Swimmer not found");
+      Swimmer.findByIdAndDelete = jest.fn().mockResolvedValue(undefined);
+      const req = {
+        params: {
+          id: 1,
+        },
+      };
+      const res = {};
+      const next = jest.fn();
+
+      await deleteSwimmer(req, res, next);
 
       expect(next).toHaveBeenCalledWith(error);
     });
