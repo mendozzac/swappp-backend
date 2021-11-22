@@ -58,10 +58,10 @@ beforeEach(async () => {
   await Swimmer.create(fakeSwimmers);
 });
 
-describe("Given the '/swimmers' endpoint", () => {
+describe("Given the '/nadadores' endpoint", () => {
   describe("When it recives a GET request", () => {
     test("Then it should send a response with a swimmers list", async () => {
-      const { body } = await request.get("/swimmers");
+      const { body } = await request.get("/nadadores");
 
       const fakeSwimmersWithId = fakeSwimmers.map((fakeSwimmer) => {
         const fakeSwimmerWithId = {
@@ -78,7 +78,7 @@ describe("Given the '/swimmers' endpoint", () => {
   });
 });
 
-describe("Given the '/register' endpoint", () => {
+describe("Given the '/registro' endpoint", () => {
   describe("When it receives a POST request", () => {
     test("Then it should send a response with the swimmers and status 201", async () => {
       const swimmer = {
@@ -97,7 +97,7 @@ describe("Given the '/register' endpoint", () => {
         },
       };
       const { body } = await request
-        .post("/register")
+        .post("/registro")
         .send(swimmer)
         .expect(201);
 
