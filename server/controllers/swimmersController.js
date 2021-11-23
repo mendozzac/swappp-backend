@@ -1,4 +1,6 @@
 const Swimmer = require("../../database/models/swimmer");
+// eslint-disable-next-line no-unused-vars
+const Time = require("../../database/models/time");
 
 const getSwimmers = async (req, res) => {
   const swimmers = await Swimmer.find();
@@ -9,7 +11,9 @@ const getSwimmerById = async (req, res, next) => {
   const { idSwimmer } = req.params;
 
   try {
-    const searchedSwimmer = await Swimmer.findById(idSwimmer);
+    const searchedSwimmer = await Swimmer.findById(idSwimmer).populate({
+      path: "times",
+    });
     if (searchedSwimmer) {
       res.json(searchedSwimmer);
     } else {
