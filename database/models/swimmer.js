@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, Types } = require("mongoose");
 
 const swimmerSchema = new Schema({
   name: {
@@ -22,11 +22,8 @@ const swimmerSchema = new Schema({
   height: Number,
   weight: Number,
   times: {
-    distance: Number,
-    style: String,
-    date: String,
-    time: String,
-    pool: Number,
+    type: [Types.ObjectId],
+    ref: "Time",
   },
 });
 
