@@ -4,6 +4,7 @@ const {
   createSwimmer,
   getSwimmerById,
   deleteSwimmer,
+  updateSwimmer,
 } = require("./swimmersController");
 
 jest.mock("../../../database/models/swimmer");
@@ -206,6 +207,35 @@ describe("Given a deleteSwimmer function", () => {
       await deleteSwimmer(req, res, next);
 
       expect(next).toHaveBeenCalledWith(error);
+    });
+  });
+});
+
+describe("Given an updateSwimmer controller", () => {
+  describe("When it receives an object res and object req with a body", () => {
+    test("Then it should invoke the json method of res and call the Swimmer.findByIdAndUpdate", async () => {
+      const req = { body: { id: 4 } };
+      Swimmer.findByIdAndUpdate = jest.fn();
+      const res = { json: jest.fn() };
+      const next = () => {};
+
+      await updateSwimmer(req, res, next);
+
+      expect(Swimmer.findByIdAndUpdate).toHaveBeenCalled();
+      expect(res.json).toHaveBeenCalled();
+    });
+  });
+  describe("When it receives an object res and invalid object req", () => {
+    test("Then it should invoke next with an error", async () => {
+      const req = {};
+      const error = {};
+      Swimmer.findByIdAndUpdate = jest.fn().mockRejectedValue(error);
+      const res = { json: jest.fn() };
+      const next = jest.fn();
+
+      await updateSwimmer(req, res, next);
+
+      expect(next).toHaveBeenCalled();
     });
   });
 });
