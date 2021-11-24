@@ -5,7 +5,6 @@ const { initializeServer, app } = require("../..");
 const connectDB = require("../../../database");
 const Swimmer = require("../../../database/models/swimmer");
 
-const string = process.env.MONGODB_STRING_TEST;
 const request = supertest(app);
 let server;
 const fakeSwimmers = [
@@ -30,8 +29,7 @@ const fakeSwimmers = [
 ];
 
 beforeAll(async () => {
-  jest.setTimeout(10000);
-  await connectDB(string);
+  await connectDB(process.env.MONGODB_STRING_TEST);
   server = await initializeServer(process.env.SERVER_PORT_TEST);
 });
 
