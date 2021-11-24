@@ -1,9 +1,9 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
 const supertest = require("supertest");
-const { initializeServer, app } = require("..");
-const connectDB = require("../../database");
-const Swimmer = require("../../database/models/swimmer");
+const { initializeServer, app } = require("../..");
+const connectDB = require("../../../database");
+const Swimmer = require("../../../database/models/swimmer");
 
 const request = supertest(app);
 let server;
@@ -15,13 +15,7 @@ const fakeSwimmers = [
     birthdate: "27/04/93",
     height: 196,
     weight: 85,
-    times: {
-      distance: 100,
-      style: "Mariposa",
-      date: "20/03/20",
-      time: "52.09",
-      pool: 50,
-    },
+    times: [],
   },
   {
     _id: "61965fd7a6781611df2a88cf",
@@ -30,13 +24,7 @@ const fakeSwimmers = [
     birthdate: "11/08/90",
     height: 190,
     weight: 80,
-    times: {
-      distance: 200,
-      style: "Espalda",
-      date: "22/09/19",
-      time: "1:56.09",
-      pool: 50,
-    },
+    times: [],
   },
 ];
 
@@ -45,16 +33,16 @@ beforeAll(async () => {
   server = await initializeServer(process.env.SERVER_PORT_TEST);
 });
 
+beforeEach(async () => {
+  await Swimmer.deleteMany();
+  await Swimmer.create(fakeSwimmers);
+});
+
 afterAll((done) => {
   server.close(async () => {
     await mongoose.connection.close();
     done();
   });
-});
-
-beforeEach(async () => {
-  await Swimmer.deleteMany();
-  await Swimmer.create(fakeSwimmers);
 });
 
 describe("Given the '/nadadores' endpoint", () => {
@@ -87,13 +75,7 @@ describe("Given the '/registro' endpoint", () => {
         image: "https://image.flaticon.com/icons/png/512/1228/1228248.png",
         height: 198,
         weight: 85,
-        times: {
-          distance: 100,
-          style: "Braza",
-          date: "20/03/20",
-          time: "1:00.09",
-          pool: 50,
-        },
+        times: [],
       };
       const { body } = await request
         .post("/registro")

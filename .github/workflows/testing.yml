@@ -1,0 +1,24 @@
+name: Testing on push
+
+on: push
+
+jobs:
+  test:
+    name: Test passes
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+
+      - name: Install modules
+        run: npm ci
+
+      - name: Testing
+        run: npm test
+
+      - name: Supertest
+        run: npm run supertest
+        env:
+          MONGODB_STRING_TEST: ${{secrets.MONGODB_STRING_TEST}}
+          SERVER_PORT_TEST: ${{secrets.SERVER_PORT_TEST}}
