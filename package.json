@@ -8,7 +8,7 @@
     "start": "node index",
     "supertest": "jest --testPathPattern /server/routes",
     "test": "jest --testPathIgnorePatterns /server/routes/",
-    "watch": "--watchAll --collect-coverage",
+    "watch": "jest --watchAll --collect-coverage",
     "prepare": "husky install"
   },
   "keywords": [],
