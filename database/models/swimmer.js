@@ -13,8 +13,8 @@ const swimmerSchema = new Schema({
     type: String,
     default: "https://image.flaticon.com/icons/png/512/1228/1228248.png",
   },
-  username: String,
-  password: String,
+  username: { type: String, require: true },
+  password: { type: String, require: true },
   birthdate: {
     type: String,
     require: true,

@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon index -q",
     "start": "node index",
-    "test": "jest",
+    "supertest": "jest --testPathPattern /server/routes",
+    "test": "jest --testPathIgnorePatterns /server/routes/",
     "watch": "--watchAll --collect-coverage"
   },
   "keywords": [],

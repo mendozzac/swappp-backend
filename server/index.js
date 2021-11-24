@@ -3,7 +3,7 @@ const chalk = require("chalk");
 const debug = require("debug")("swappp:server");
 const morgan = require("morgan");
 const express = require("express");
-const swimmersRoutes = require("./routes/swimmersRoutes");
+const swimmersRoutes = require("./routes/swimmersRoutes/swimmersRoutes");
 const { notFoundHandler, generalErrorHandler } = require("./middlewares/error");
 
 const app = express();

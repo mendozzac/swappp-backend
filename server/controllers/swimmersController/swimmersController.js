@@ -1,6 +1,6 @@
-const Swimmer = require("../../database/models/swimmer");
+const Swimmer = require("../../../database/models/swimmer");
 // eslint-disable-next-line no-unused-vars
-const Time = require("../../database/models/time");
+const Time = require("../../../database/models/time");
 
 const getSwimmers = async (req, res) => {
   const swimmers = await Swimmer.find();
@@ -58,4 +58,24 @@ const deleteSwimmer = async (req, res, next) => {
   }
 };
 
-module.exports = { getSwimmers, getSwimmerById, createSwimmer, deleteSwimmer };
+const updateSwimmer = async (req, res, next) => {
+  try {
+    const { id } = req.body;
+    const newSwimmer = await Swimmer.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    res.json(newSwimmer);
+  } catch (error) {
+    error.message = "Cambio no realizado";
+    error.code = 400;
+    next(error);
+  }
+};
+
+module.exports = {
+  getSwimmers,
+  getSwimmerById,
+  createSwimmer,
+  deleteSwimmer,
+  updateSwimmer,
+};
