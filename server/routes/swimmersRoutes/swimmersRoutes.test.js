@@ -30,6 +30,7 @@ const fakeSwimmers = [
 ];
 
 beforeAll(async () => {
+  jest.setTimeout(10000);
   await connectDB(string);
   server = await initializeServer(process.env.SERVER_PORT_TEST);
 });
