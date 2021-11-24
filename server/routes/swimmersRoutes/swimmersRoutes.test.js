@@ -5,6 +5,7 @@ const { initializeServer, app } = require("../..");
 const connectDB = require("../../../database");
 const Swimmer = require("../../../database/models/swimmer");
 
+const string = process.env.MONGODB_STRING_TEST;
 const request = supertest(app);
 let server;
 const fakeSwimmers = [
@@ -29,8 +30,13 @@ const fakeSwimmers = [
 ];
 
 beforeAll(async () => {
-  await connectDB(process.env.MONGODB_STRING_TEST);
+  await connectDB(string);
   server = await initializeServer(process.env.SERVER_PORT_TEST);
+});
+
+beforeEach(async () => {
+  await Swimmer.deleteMany();
+  await Swimmer.create(fakeSwimmers);
 });
 
 afterAll((done) => {
@@ -38,11 +44,6 @@ afterAll((done) => {
     await mongoose.connection.close();
     done();
   });
-});
-
-beforeEach(async () => {
-  await Swimmer.deleteMany();
-  await Swimmer.create(fakeSwimmers);
 });
 
 describe("Given the '/nadadores' endpoint", () => {
