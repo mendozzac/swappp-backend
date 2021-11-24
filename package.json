@@ -8,7 +8,8 @@
     "start": "node index",
     "supertest": "jest --testPathPattern /server/routes",
     "test": "jest --testPathIgnorePatterns /server/routes/",
-    "watch": "--watchAll --collect-coverage"
+    "watch": "--watchAll --collect-coverage",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
@@ -20,7 +21,8 @@
     "eslint-plugin-import": "^2.25.3",
     "jest": "^27.3.1",
     "nodemon": "^2.0.15",
-    "supertest": "^6.1.6"
+    "supertest": "^6.1.6",
+    "husky": "^7.0.0"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
