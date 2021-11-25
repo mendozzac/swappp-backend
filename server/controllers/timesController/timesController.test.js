@@ -38,7 +38,7 @@ describe("Given a createTime controller", () => {
 
 describe("Given an updateTime controller", () => {
   describe("When it receives an object res and an object req with a body", () => {
-    test("Then it should invoke the json method of res and callthe Time.findByIdAndUpdate", async () => {
+    test("Then it should invoke the json method of res and call the Time.findByIdAndUpdate", async () => {
       const req = { body: { id: 6 } };
       Time.findByIdAndUpdate = jest.fn();
       const res = { json: jest.fn() };
