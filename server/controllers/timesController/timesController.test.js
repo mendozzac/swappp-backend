@@ -1,3 +1,4 @@
+const Swimmer = require("../../../database/models/swimmer");
 const Time = require("../../../database/models/time");
 const { createTime, updateTime } = require("./timesController");
 
@@ -13,6 +14,7 @@ describe("Given a createTime controller", () => {
       };
       const req = { body: time };
       Time.create = jest.fn().mockResolvedValue(time);
+      Swimmer.findOneAndUpdate = jest.fn();
       const res = { status: () => {}, json: jest.fn() };
 
       await createTime(req, res);

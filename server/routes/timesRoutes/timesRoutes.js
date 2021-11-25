@@ -9,6 +9,6 @@ const router = express.Router();
 
 router.post(path.swimmer, createTime);
 
-router.put(path.times, updateTime);
+router.put(path.time, updateTime);
 
 module.exports = router;
