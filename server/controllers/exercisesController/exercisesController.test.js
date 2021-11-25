@@ -1,4 +1,5 @@
 const Exercise = require("../../../database/models/exercise");
+const Session = require("../../../database/models/session");
 const { createExercise, updateExercise } = require("./exercisesController");
 
 describe("Given a createExercise controller", () => {
@@ -10,6 +11,7 @@ describe("Given a createExercise controller", () => {
       };
       const req = { body: exercise };
       Exercise.create = jest.fn().mockResolvedValue(exercise);
+      Session.findOneAndUpdate = jest.fn();
       const res = { status: () => {}, json: jest.fn() };
 
       await createExercise(req, res);
