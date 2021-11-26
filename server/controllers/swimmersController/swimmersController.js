@@ -1,6 +1,5 @@
 const Swimmer = require("../../../database/models/swimmer");
-// eslint-disable-next-line no-unused-vars
-const Time = require("../../../database/models/time");
+require("../../../database/models/time");
 
 const getSwimmers = async (req, res) => {
   const swimmers = await Swimmer.find();

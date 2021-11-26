@@ -1,6 +1,5 @@
 const Session = require("../../../database/models/session");
-// eslint-disable-next-line no-unused-vars
-const Exercise = require("../../../database/models/exercise");
+require("../../../database/models/exercise");
 
 const getSessions = async (req, res) => {
   const sessions = await Session.find();
