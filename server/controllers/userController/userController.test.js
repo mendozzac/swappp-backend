@@ -2,9 +2,9 @@ require("dotenv").config();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../../../database/models/user");
-const userLogin = require("./userController");
+const { userLogin } = require("./userController");
 
-jest.mock("../../database/models/user");
+jest.mock("../../../database/models/user");
 jest.mock("bcrypt");
 jest.mock("jsonwebtoken");
 
@@ -13,14 +13,13 @@ describe("Given an userLogin function", () => {
     test("Then it should invoke the next function with an error", async () => {
       const username = "Paul";
       const req = { body: { username } };
-      const res = {};
       User.findOne = jest.fn().mockResolvedValue(false);
+      const res = {};
       const error = new Error("Usuario no encontrado");
       const next = jest.fn();
 
       await userLogin(req, res, next);
 
-      expect(User.findOne).toHaveBeenCalled();
       expect(next).toHaveBeenCalledWith(error);
     });
   });
@@ -32,12 +31,12 @@ describe("Given an userLogin function", () => {
           password: "mal",
         },
       };
-      const res = {};
-      const next = jest.fn();
       User.findOne = jest
         .fn()
         .mockResolvedValue({ username: "Paul", password: "bien" });
       bcrypt.compare = jest.fn().mockResolvedValue(false);
+      const res = {};
+      const next = jest.fn();
       const error = new Error("Contraseña incorrecta");
 
       await userLogin(req, res, next);
