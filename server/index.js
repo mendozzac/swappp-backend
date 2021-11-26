@@ -3,7 +3,7 @@ const chalk = require("chalk");
 const debug = require("debug")("swappp:server");
 const morgan = require("morgan");
 const express = require("express");
-const coachRoutes = require("./routes/coachRoutes/coachRoutes");
+const userRoutes = require("./routes/userRoutes/userRoutes");
 const swimmersRoutes = require("./routes/swimmersRoutes/swimmersRoutes");
 const timesRoutes = require("./routes/timesRoutes/timesRoutes");
 const sessionsRoutes = require("./routes/sessionsRoutes/sessionsRoutes");
@@ -31,8 +31,8 @@ const initializeServer = (port) =>
 app.use(morgan("dev"));
 app.use(cors());
 app.use(express.json());
-app.use("/", coachRoutes);
 app.use("/", swimmersRoutes);
+app.use("/", userRoutes);
 app.use("/", timesRoutes);
 app.use("/", sessionsRoutes);
 app.use("/", exercisesRoutes);

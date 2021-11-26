@@ -12,7 +12,6 @@ const fakeSwimmers = [
     _id: "619664f7a6781611df2a88d2",
     name: "Kelvin",
     surname: "Andrew",
-    birthdate: "27/04/93",
     height: 196,
     weight: 85,
     times: [],
@@ -21,7 +20,6 @@ const fakeSwimmers = [
     _id: "61965fd7a6781611df2a88cf",
     name: "James",
     surname: "Campbell",
-    birthdate: "11/08/90",
     height: 190,
     weight: 80,
     times: [],
@@ -71,7 +69,6 @@ describe("Given the '/registro' endpoint", () => {
       const swimmer = {
         name: "Charles",
         surname: "Andrew",
-        birthdate: "27/04/93",
         image: "https://image.flaticon.com/icons/png/512/1228/1228248.png",
         height: 198,
         weight: 85,
