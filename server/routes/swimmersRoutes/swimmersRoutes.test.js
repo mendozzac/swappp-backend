@@ -69,9 +69,9 @@ describe("Given the '/registro' endpoint", () => {
       const swimmer = {
         name: "Charles",
         surname: "Andrew",
-        image: "https://image.flaticon.com/icons/png/512/1228/1228248.png",
-        height: 198,
-        weight: 85,
+        height: 188,
+        weight: 78,
+        image: "",
         times: [],
       };
       const { body } = await request
