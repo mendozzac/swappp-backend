@@ -5,7 +5,7 @@ const timeShema = new Schema({
   style: { type: String, require: true },
   date: { type: String, require: true },
   time: {
-    mintutes: { type: Number, require: true },
+    mintutes: { type: Number, default: 0 },
     seconds: { type: Number, require: true },
     tenths: { type: Number, require: true },
   },
