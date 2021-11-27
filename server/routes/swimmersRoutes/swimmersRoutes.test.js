@@ -4,6 +4,7 @@ const supertest = require("supertest");
 const { initializeServer, app } = require("../..");
 const connectDB = require("../../../database");
 const Swimmer = require("../../../database/models/swimmer");
+const path = require("../../path/path");
 
 const request = supertest(app);
 let server;
@@ -43,10 +44,10 @@ afterAll((done) => {
   });
 });
 
-describe("Given the '/nadadores' endpoint", () => {
+describe("Given the swimmers endpoint", () => {
   describe("When it recives a GET request", () => {
     test("Then it should send a response with a swimmers list", async () => {
-      const { body } = await request.get("/nadadores");
+      const { body } = await request.get(path.swimmers);
 
       const fakeSwimmersWithId = fakeSwimmers.map((fakeSwimmer) => {
         const fakeSwimmerWithId = {
@@ -59,27 +60,6 @@ describe("Given the '/nadadores' endpoint", () => {
         return fakeSwimmerWithId;
       });
       expect(body).toHaveLength(fakeSwimmersWithId.length);
-    });
-  });
-});
-
-describe("Given the '/registro' endpoint", () => {
-  describe("When it receives a POST request", () => {
-    test("Then it should send a response with the swimmers and status 201", async () => {
-      const swimmer = {
-        name: "Charles",
-        surname: "Andrew",
-        height: 188,
-        weight: 78,
-        image: "",
-        times: [],
-      };
-      const { body } = await request
-        .post("/registro")
-        .send(swimmer)
-        .expect(201);
-
-      expect(body).toHaveProperty("name", "Charles");
     });
   });
 });

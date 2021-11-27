@@ -28,7 +28,9 @@ const getSwimmerById = async (req, res, next) => {
 
 const createSwimmer = async (req, res, next) => {
   try {
+    const { idUser } = req.params;
     const swimmer = req.body;
+    swimmer.user = idUser;
     const newSwimmer = await Swimmer.create(swimmer);
     res.status(201);
     res.json(newSwimmer);

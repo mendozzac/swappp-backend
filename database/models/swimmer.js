@@ -13,13 +13,23 @@ const swimmerSchema = new Schema({
     type: String,
     default: "https://image.flaticon.com/icons/png/512/1228/1228248.png",
   },
-  user: { type: Types.ObjectId, ref: "User", require: true },
+  user: {
+    type: Types.ObjectId,
+    ref: "User",
+    require: true,
+  },
   birthdate: {
     type: Date,
     require: true,
   },
-  height: { type: Number, default: 0 },
-  weight: { type: Number, default: 0 },
+  height: {
+    type: Number,
+    default: 0,
+  },
+  weight: {
+    type: Number,
+    default: 0,
+  },
   times: {
     type: [Types.ObjectId],
     ref: "Time",
