@@ -4,7 +4,7 @@ const swimmerSchema = {
   body: Joi.object({
     name: Joi.string().required(),
     surname: Joi.string().required(),
-    user: Joi.object({}),
+    user: Joi.object().required(),
     height: Joi.number().optional(),
     weight: Joi.number().optional(),
     image: Joi.string().optional(),
