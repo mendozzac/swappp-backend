@@ -106,3 +106,6 @@ dist
 
 # Sonnarqube
 .scannerwork
+
+# Firebase
+firebase-config.json
