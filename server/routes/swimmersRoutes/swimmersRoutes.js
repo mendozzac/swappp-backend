@@ -6,8 +6,8 @@ const {
   getSwimmerById,
   updateSwimmer,
 } = require("../../controllers/swimmersController/swimmersController");
-const uploadFirebase = require("../../middlewares/firebase");
-const upload = require("../../middlewares/uploadLocal");
+const uploadFirebase = require("../../middlewares/firebase-upload/firebase");
+const upload = require("../../middlewares/firebase-upload/uploadLocal");
 const path = require("../../path/path");
 
 const router = express.Router();
