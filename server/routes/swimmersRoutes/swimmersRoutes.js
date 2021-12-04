@@ -16,6 +16,8 @@ router.get(path.swimmers, getSwimmers);
 
 router.get(path.swimmer, getSwimmerById);
 
+router.post(path.newSwimmer, createSwimmer);
+
 router.post(
   path.newSwimmer,
   upload.single("image"),
