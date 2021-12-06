@@ -3,12 +3,12 @@ const Time = require("../../../database/models/time");
 
 const createTime = async (req, res, next) => {
   try {
+    const { idSwimmer } = req.params;
     const time = req.body;
     const newTime = await Time.create(time);
-    await Swimmer.findOneAndUpdate(
-      { id: req.idSwimmer },
-      { $push: { times: newTime.id } }
-    );
+    await Swimmer.findByIdAndUpdate(idSwimmer, {
+      $push: { times: newTime.id },
+    });
     res.status(201);
     res.json(newTime);
   } catch (error) {

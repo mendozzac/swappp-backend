@@ -21,7 +21,7 @@ const userLogin = async (req, res, next) => {
   const token = jwt.sign(
     {
       id: user.id,
-      name: user.name,
+      isCoach: user.isCoach,
     },
     process.env.SECRET
   );

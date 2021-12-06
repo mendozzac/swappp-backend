@@ -3,12 +3,12 @@ const Session = require("../../../database/models/session");
 
 const createExercise = async (req, res, next) => {
   try {
+    const { idSession } = req.params;
     const exercise = req.body;
     const newExercise = await Exercise.create(exercise);
-    await Session.findOneAndUpdate(
-      { id: req.idSession },
-      { $push: { exercises: newExercise.id } }
-    );
+    await Session.findByIdAndUpdate(idSession, {
+      $push: { exercises: newExercise.id },
+    });
     res.status(201);
     res.json(newExercise);
   } catch (error) {
