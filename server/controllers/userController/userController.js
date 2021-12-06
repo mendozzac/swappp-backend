@@ -47,4 +47,15 @@ const getUsers = async (req, res) => {
   res.json(users);
 };
 
-module.exports = { userLogin, userSignUp, getUsers };
+const deleteUser = async (req, res, next) => {
+  const { idUser } = req.params;
+  const searchedUser = await User.findByIdAndDelete(idUser);
+  if (searchedUser) {
+    res.json({ id: searchedUser.id });
+  } else {
+    const error = new Error("User not found");
+    next(error);
+  }
+};
+
+module.exports = { userLogin, userSignUp, getUsers, deleteUser };
