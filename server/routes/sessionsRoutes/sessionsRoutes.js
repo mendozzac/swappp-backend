@@ -15,7 +15,7 @@ router.get(path.season, getSessions);
 
 router.get(path.session, getSessionById);
 
-router.post(path.newSession, validate(sessionSchema), createSession);
+router.post(path.newSession, createSession);
 
 router.put(path.session, validate(sessionSchema), updateSession);
 

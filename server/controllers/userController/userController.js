@@ -39,7 +39,7 @@ const userSignUp = async (req, res, next) => {
   newUser.password = await bcrypt.hash(newUser.password, 10);
   User.create(newUser);
 
-  res.json().status(200);
+  res.json(user.id).status(200);
 };
 
 const getUsers = async (req, res) => {

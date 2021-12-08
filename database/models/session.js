@@ -1,8 +1,8 @@
 const { Schema, model, Types } = require("mongoose");
 
 const sessionSchema = new Schema({
-  date: {
-    type: Date,
+  day: {
+    type: String,
     require: true,
   },
   exercises: {
