@@ -43,6 +43,7 @@ const createSwimmer = async (req, res, next) => {
 
 const deleteSwimmer = async (req, res, next) => {
   const { idSwimmer } = req.params;
+
   try {
     const searchedSwimmer = await Swimmer.findByIdAndDelete(idSwimmer);
     if (searchedSwimmer) {
