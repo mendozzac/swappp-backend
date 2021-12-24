@@ -3,11 +3,11 @@ const { Schema, model, Types } = require("mongoose");
 const swimmerSchema = new Schema({
   name: {
     type: String,
-    default: "Fernando",
+    require: true,
   },
   surname: {
     type: String,
-    default: "Mendoza"
+    require: true,
   },
   image: {
     type: String,
