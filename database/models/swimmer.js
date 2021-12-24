@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, Types } = require("mongoose");
 
 const swimmerSchema = new Schema({
   name: {
@@ -13,20 +13,27 @@ const swimmerSchema = new Schema({
     type: String,
     default: "https://image.flaticon.com/icons/png/512/1228/1228248.png",
   },
-  username: String,
-  password: String,
-  birthdate: {
-    type: String,
+  user: {
+    type: Types.ObjectId,
+    ref: "User",
     require: true,
   },
-  height: Number,
-  weight: Number,
+  birthdate: {
+    type: Date,
+    require: true,
+  },
+  height: {
+    type: Number,
+    default: 0,
+  },
+  weight: {
+    type: Number,
+    default: 0,
+  },
   times: {
-    distance: Number,
-    style: String,
-    date: String,
-    time: String,
-    pool: Number,
+    type: [Types.ObjectId],
+    ref: "Time",
+    default: [],
   },
 });
 

@@ -1,4 +1,5 @@
-const Swimmer = require("../../database/models/swimmer");
+const Swimmer = require("../../../database/models/swimmer");
+require("../../../database/models/time");
 
 const getSwimmers = async (req, res) => {
   const swimmers = await Swimmer.find();
@@ -6,10 +7,12 @@ const getSwimmers = async (req, res) => {
 };
 
 const getSwimmerById = async (req, res, next) => {
-  const { idSwimmer } = req.parmas;
+  const { idSwimmer } = req.params;
 
   try {
-    const searchedSwimmer = await Swimmer.findById(idSwimmer);
+    const searchedSwimmer = await Swimmer.findById(idSwimmer).populate({
+      path: "times",
+    });
     if (searchedSwimmer) {
       res.json(searchedSwimmer);
     } else {
@@ -25,7 +28,9 @@ const getSwimmerById = async (req, res, next) => {
 
 const createSwimmer = async (req, res, next) => {
   try {
+    const { idUser } = req.params;
     const swimmer = req.body;
+    swimmer.user = idUser;
     const newSwimmer = await Swimmer.create(swimmer);
     res.status(201);
     res.json(newSwimmer);
@@ -38,6 +43,7 @@ const createSwimmer = async (req, res, next) => {
 
 const deleteSwimmer = async (req, res, next) => {
   const { idSwimmer } = req.params;
+
   try {
     const searchedSwimmer = await Swimmer.findByIdAndDelete(idSwimmer);
     if (searchedSwimmer) {
@@ -54,4 +60,24 @@ const deleteSwimmer = async (req, res, next) => {
   }
 };
 
-module.exports = { getSwimmers, getSwimmerById, createSwimmer, deleteSwimmer };
+const updateSwimmer = async (req, res, next) => {
+  try {
+    const { id } = req.body;
+    const newSwimmer = await Swimmer.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    res.json(newSwimmer);
+  } catch (error) {
+    error.message = "Cambio no realizado";
+    error.code = 400;
+    next(error);
+  }
+};
+
+module.exports = {
+  getSwimmers,
+  getSwimmerById,
+  createSwimmer,
+  deleteSwimmer,
+  updateSwimmer,
+};
